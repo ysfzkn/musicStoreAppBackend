@@ -15,11 +15,11 @@ public class Instrument
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column( name = "name", nullable = false, length = 100)
+    private String name;
+
     @Column( name = "model", nullable = false, length = 100)
     private String model;
-
-    @Column( name = "brand", nullable = false, length = 100)
-    private String brand;
 
     // May be adding new type class
     @Column( name = "type", nullable = false, length = 100)
