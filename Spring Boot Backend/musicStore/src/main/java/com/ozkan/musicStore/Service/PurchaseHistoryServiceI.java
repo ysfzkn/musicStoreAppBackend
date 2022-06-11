@@ -5,7 +5,8 @@ import com.ozkan.musicStore.Repository.Projection.PurchaseItemI;
 
 import java.util.List;
 
-public interface PurchaseHistoryServiceI {
+public interface PurchaseHistoryServiceI
+{
     PurchaseHistory savePurchaseHistory(PurchaseHistory purchaseHistory);
 
     List<PurchaseItemI> findPurchasedItemsOfUser(Long userId);
