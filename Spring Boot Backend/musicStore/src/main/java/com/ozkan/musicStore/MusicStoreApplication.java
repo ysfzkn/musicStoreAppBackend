@@ -9,12 +9,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @SpringBootApplication
 public class MusicStoreApplication
 {
-	@Bean
-	public PasswordEncoder passwordEncoder()
+	public static void main(String[] args)
 	{
-		return new BCryptPasswordEncoder();
-	}
-	public static void main(String[] args) {
 		SpringApplication.run(MusicStoreApplication.class, args);
 	}
 
