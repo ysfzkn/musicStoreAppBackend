@@ -14,15 +14,11 @@ import java.util.Optional;
 @Service
 public class UserService implements UserServiceI
 {
-    private final UserRepositoryI userRepository;
+    @Autowired
+    private UserRepositoryI userRepository;
 
-    private final PasswordEncoder passwordEncoder; // Defined in main class
-
-    public UserService(UserRepositoryI userRepository, PasswordEncoder passwordEncoder)
-    {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public User saveUser(User user)

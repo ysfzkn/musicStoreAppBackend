@@ -78,14 +78,16 @@ public class JwtProvider implements JwtProviderI
     {
         Claims claims = extractClaims(request);
 
-        if (claims == null || claims.getExpiration().before(new Date()))
+        if (claims == null)
         {
             return false;
         }
-        else
+        if(claims.getExpiration().before(new Date()))
         {
-            return true;
+            return false;
         }
+        return true;
+
 
     }
 

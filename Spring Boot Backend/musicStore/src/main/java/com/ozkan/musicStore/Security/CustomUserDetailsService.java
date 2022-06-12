@@ -3,6 +3,7 @@ package com.ozkan.musicStore.Security;
 import com.ozkan.musicStore.Model.User;
 import com.ozkan.musicStore.Service.UserServiceI;
 import com.ozkan.musicStore.Util.SecurityUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -14,12 +15,8 @@ import java.util.Set;
 @Service
 public class CustomUserDetailsService implements UserDetailsService
 {
-    private final UserServiceI userService;
-
-    public CustomUserDetailsService(UserServiceI userService)
-    {
-        this.userService = userService;
-    }
+    @Autowired
+    private UserServiceI userService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException

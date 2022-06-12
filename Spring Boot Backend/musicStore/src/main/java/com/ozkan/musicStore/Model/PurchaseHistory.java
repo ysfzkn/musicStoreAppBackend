@@ -1,6 +1,4 @@
 package com.ozkan.musicStore.Model;
-
-
 import lombok.Data;
 
 import javax.persistence.*;
