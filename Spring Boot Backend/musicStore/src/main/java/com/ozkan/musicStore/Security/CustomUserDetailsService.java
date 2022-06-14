@@ -1,6 +1,7 @@
 package com.ozkan.musicStore.Security;
 
 import com.ozkan.musicStore.Model.User;
+import com.ozkan.musicStore.Repository.UserRepositoryI;
 import com.ozkan.musicStore.Service.UserServiceI;
 import com.ozkan.musicStore.Util.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +16,18 @@ import java.util.Set;
 @Service
 public class CustomUserDetailsService implements UserDetailsService
 {
+    private final UserRepositoryI userRepository;
+
     @Autowired
-    private UserServiceI userService;
+    public CustomUserDetailsService(UserRepositoryI userRepository)
+    {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
     {
-        User user = userService.findByUsername(username)
+        User user = userRepository.findByUsername(username)
                 .orElseThrow(()-> new UsernameNotFoundException(username));
 
         Set<GrantedAuthority> authorities = Set.of(SecurityUtils.convertAuthority(user.getRole().name()));

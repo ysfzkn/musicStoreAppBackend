@@ -11,8 +11,12 @@ import java.util.List;
 @Service
 public class InstrumentService implements InstrumentServiceI
 {
-    @Autowired
-    private InstrumentRepositoryI instRepository;
+    private final InstrumentRepositoryI instRepository;
+
+    public InstrumentService(InstrumentRepositoryI instRepository)
+    {
+        this.instRepository = instRepository;
+    }
 
     @Override
     public Instrument saveInstrument(Instrument instrument)

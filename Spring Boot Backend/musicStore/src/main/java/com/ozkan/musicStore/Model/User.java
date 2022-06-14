@@ -1,10 +1,8 @@
 package com.ozkan.musicStore.Model;
 
-
 import lombok.Data;
 
 import javax.persistence.*;
-import java.beans.Transient;
 import java.time.LocalDateTime;
 
 @Data
@@ -31,5 +29,8 @@ public class User
     @Enumerated(EnumType.STRING)
     @Column( name = "role", nullable = false)
     private Role role;
+
+    @Transient
+    private String token;
 
 }

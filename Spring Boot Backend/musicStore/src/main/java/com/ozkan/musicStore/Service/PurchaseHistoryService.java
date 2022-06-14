@@ -12,8 +12,12 @@ import java.util.List;
 @Service
 public class PurchaseHistoryService implements PurchaseHistoryServiceI
 {
-    @Autowired
-    private PurchaseHistoryRepositoryI purchaseHistoryRepository;
+    private final PurchaseHistoryRepositoryI purchaseHistoryRepository;
+
+    public PurchaseHistoryService(PurchaseHistoryRepositoryI purchaseHistoryRepository)
+    {
+        this.purchaseHistoryRepository = purchaseHistoryRepository;
+    }
 
     @Override
     public PurchaseHistory savePurchaseHistory(PurchaseHistory purchaseHistory)
