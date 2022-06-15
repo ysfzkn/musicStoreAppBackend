@@ -1,4 +1,4 @@
-# Music Store
+# Music Store Backend
 
 ### Endpoints
 
