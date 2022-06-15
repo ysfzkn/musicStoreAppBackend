@@ -51,6 +51,11 @@ public class JwtProvider implements JwtProviderI
     {
         Claims claims = extractClaims(request);
 
+        if (claims == null)
+        {
+            return null;
+        }
+
         String username = claims.getSubject();
         Long userId = claims.get("userId" , Long.class);
 

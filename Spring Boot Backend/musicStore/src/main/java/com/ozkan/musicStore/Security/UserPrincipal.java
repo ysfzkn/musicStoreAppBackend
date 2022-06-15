@@ -1,6 +1,8 @@
 package com.ozkan.musicStore.Security;
 
+import com.ozkan.musicStore.Model.Role;
 import com.ozkan.musicStore.Model.User;
+import com.ozkan.musicStore.Util.SecurityUtils;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,6 +24,17 @@ public class UserPrincipal implements UserDetails
     transient private String password; // Don't show up serialized places. Temporary.
     transient private User user; // It is just login operations, not using in JWT.
     private Set<GrantedAuthority> authorities;
+
+    public static UserPrincipal createSuperUser()
+    {
+        Set<GrantedAuthority> authorities = Set.of(SecurityUtils.convertAuthority(Role.SYSTEM_MANAGER.name()));
+
+        return UserPrincipal.builder()
+                .id(-1L)
+                .username("system-admin")
+                .authorities(authorities)
+                .build();
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities()

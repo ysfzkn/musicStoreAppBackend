@@ -16,6 +16,12 @@ public class JwtAuthFilter extends OncePerRequestFilter
     @Autowired
     private JwtProviderI jwtProvider;
 
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException
+    {
+        return request.getRequestURI().startsWith("/internal");
+    }
+
     // To create Authentication object from Http Request
     @Override
     protected void doFilterInternal(HttpServletRequest request,

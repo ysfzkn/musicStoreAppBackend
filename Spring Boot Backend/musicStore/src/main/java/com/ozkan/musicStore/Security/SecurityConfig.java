@@ -1,9 +1,12 @@
 package com.ozkan.musicStore.Security;
 
+import com.ozkan.musicStore.Model.Role;
 import com.ozkan.musicStore.Security.JWT.JwtAuthFilter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -22,12 +25,15 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter
 {
+    @Value("${authentication.internal-api-key}")
+    private String internalApiKey;
+    @Autowired
     private CustomUserDetailsService userDetailsService;
 
-    @Autowired
-    public SecurityConfig(CustomUserDetailsService userDetailsService)
+    @Bean
+    public PasswordEncoder encoder()
     {
-        this.userDetailsService = userDetailsService;
+        return new BCryptPasswordEncoder();
     }
 
     @Override
@@ -36,19 +42,30 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
+    @Bean
+    public InternalApiAuthFilter internalApiAuthFilter()
+    {
+        return new InternalApiAuthFilter(internalApiKey);
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception
     {
         http.cors();
-        http.csrf();
+        http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http.authorizeRequests()
-                .antMatchers("/api/authentication/**").permitAll()
+                .antMatchers("/auth/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/instrument").permitAll()
+                .antMatchers("/instrument/**").hasRole(Role.ADMIN.name())
+                .antMatchers("/internal/**").hasAnyRole(Role.SYSTEM_MANAGER.name())
                 .anyRequest().authenticated();
 
         // JWT Filter
-        http.addFilterBefore(jwtAuthFilter(), UsernamePasswordAuthenticationFilter.class);
+        // Internal -> JWT -> Auth
+        http.addFilterBefore(jwtAuthFilter(), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(internalApiAuthFilter(), JwtAuthFilter.class);
     }
 
     @Override

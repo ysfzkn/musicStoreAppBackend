@@ -26,12 +26,14 @@ public class AuthController
     {
         if (userService.findByUsername(user.getUsername()).isPresent())
         {
+            System.out.println("User is present!");
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
+        System.out.println("Controller working!");
         return new ResponseEntity<>(userService.saveUser(user), HttpStatus.CREATED);
     }
 
-    @PostMapping("sign-in")
+    @PostMapping("sign-in") //auth/sign-in
     public ResponseEntity<?> singIn(@RequestBody User user)
     {
         return new ResponseEntity<>(authService.signInReturnJWT(user), HttpStatus.OK);
