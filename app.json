@@ -1,0 +1,8 @@
+{
+  "name": "music-store-spring-boot",
+  "buildpacks": [
+    {
+      "url": "heroku/java"
+    }
+  ]
+}
