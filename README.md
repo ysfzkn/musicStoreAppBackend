@@ -30,7 +30,7 @@ Content-Type: application/json
 #### Change to Admin
 
 ```
-PUT /internal/cahnge-to-admin/admin HTTP/1.1
+PUT /internal/change-to-admin/admin HTTP/1.1
 Host: localhost:8080
 Authorization: Bearer InternalApiKey58
 ```
