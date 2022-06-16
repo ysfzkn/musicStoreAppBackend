@@ -23,7 +23,7 @@ public class PurchaseHistoryController
                 HttpStatus.CREATED);
     }
 
-    @GetMapping //api/purchase-history
+    @GetMapping //purchase-history
     public ResponseEntity<?> getAllPurchasesOfUser(@AuthenticationPrincipal UserPrincipal userPrincipal)
     {
         return ResponseEntity.ok(purchaseHistoryService.findPurchasedItemsOfUser(userPrincipal.getId()));
