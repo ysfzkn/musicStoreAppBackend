@@ -17,15 +17,15 @@ public class UserService implements UserServiceI
     @Autowired
     private UserRepositoryI userRepository;
 
+
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Override
     public User saveUser(User user)
     {
-        System.out.println("entered save user");
+
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        System.out.println("after password");
         user.setRole(Role.USER); // Default role defined
         user.setCreateTime(LocalDateTime.now());
 

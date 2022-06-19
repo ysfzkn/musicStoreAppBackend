@@ -28,6 +28,9 @@ public class Instrument
     @Column( name = "price", nullable = false)
     private Double price;
 
+    @Column(name = "picByte", length = 1000)
+    private byte[] picByte;
+
     @Column( name = "create_time", nullable = false)
     private LocalDateTime createTime;
 }
