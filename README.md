@@ -35,7 +35,7 @@ Content-Type: application/json
 ```
 PUT /internal/change-to-admin/admin HTTP/1.1
 Host: localhost:8080
-Authorization: Bearer InternalApiKey58
+Authorization: Bearer InternalApiKey**
 ```
 
 #### Save Instrument
