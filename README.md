@@ -1,5 +1,8 @@
 # Music Store Backend
 
+## Backend side for musicStore Project. You can reach out below front end side of this project
+## [https://github.com/ysfzkn/musicStoreAppFrontend/](https://github.com/ysfzkn/musicStoreAppFrontend)
+
 ### Endpoints
 
 #### Sign-Up
@@ -32,7 +35,7 @@ Content-Type: application/json
 ```
 PUT /internal/change-to-admin/admin HTTP/1.1
 Host: localhost:8080
-Authorization: Bearer InternalApiKey58
+Authorization: Bearer InternalApiKey**
 ```
 
 #### Save Instrument
