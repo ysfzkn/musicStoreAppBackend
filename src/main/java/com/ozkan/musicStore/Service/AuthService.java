@@ -22,8 +22,11 @@ public class AuthService implements AuthServiceI
     public User signInReturnJWT(User requestSignIn)
     {
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(requestSignIn.getUsername(), requestSignIn.getPassword())
+                new UsernamePasswordAuthenticationToken(
+                        requestSignIn.getUsername(),
+                        requestSignIn.getPassword())
         );
+
         UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
 
         String jwt = jwtProvider.generateToken(userPrincipal);
